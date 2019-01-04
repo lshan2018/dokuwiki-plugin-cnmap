@@ -1,0 +1,7 @@
+base   cnmap
+author Lshan
+email  ldg@szzxue.com
+date   2019-01-01
+name   China Map plugin
+desc   Embed a China map  (Ex. amap, baidu map) in your wiki
+url    https://www.dokuwiki.org/plugin:cnmap

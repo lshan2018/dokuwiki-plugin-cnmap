@@ -1,0 +1,31 @@
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">#%s {width: %s;height: %s;overflow: hidden;margin:0;}</style>
+<div id="%s"></div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=%s"></script>
+<script type="text/javascript">
+{
+    var pnt = gcj02_to_bd09(%f,%f);
+	var map = new BMap.Map("%s");
+	map.centerAndZoom(new BMap.Point(pnt.lng, pnt.lat), %d);
+	map.enableScrollWheelZoom(true);
+    if(%s)
+	{
+		var point = new BMap.Point(pnt.lng, pnt.lat);
+		var marker = new BMap.Marker(point);
+		marker.setTitle("%s");
+	    map.addOverlay(marker);
+	}
+
+   if(%s)
+	{
+		map.setMapType(BMAP_HYBRID_MAP);
+	}
+
+    function gcj02_to_bd09(lng, lat) {
+        var z = Math.sqrt(lng * lng + lat * lat) + 0.00002 * Math.sin(lat * Math.PI);
+        var theta = Math.atan2(lat, lng) + 0.000003 * Math.cos(lng * Math.PI);
+        return { lng: z * Math.cos(theta) + 0.0065, lat: z * Math.sin(theta) + 0.006 };
+    }
+}
+</script>
+

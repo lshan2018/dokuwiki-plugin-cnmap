@@ -1,0 +1,35 @@
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<style type="text/css">
+  #%s{
+    width: %s;
+    height: %s;
+    margin: 0px
+  }
+</style>
+<div id="%s"></div>
+<script src="https://webapi.amap.com/maps?v=1.4.12&key=%s"></script>
+<script type="text/javascript">
+{
+   var pnt = {lng:%f, lat:%f};
+    var map = new AMap.Map("%s", {
+       resizeEnable: true,
+       center:[pnt.lng, pnt.lat],
+       zoom:%d
+    });
+	if(%s)
+	{
+        var marker = new AMap.Marker({
+            position: [pnt.lng, pnt.lat],
+            offset: new AMap.Pixel(-13, -30)
+        });
+	    marker.setTitle("%s");
+        marker.setMap(map);
+	}
+
+	if(%s)
+	{
+       var layers =  [ new AMap.TileLayer.Satellite(),  new AMap.TileLayer.RoadNet() ];
+       map.setLayers(layers);
+	}
+}
+</script>
