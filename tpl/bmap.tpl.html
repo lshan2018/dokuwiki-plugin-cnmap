@@ -14,6 +14,12 @@
 		var marker = new BMap.Marker(point);
 		marker.setTitle("%s");
 	    map.addOverlay(marker);
+
+        marker.addEventListener("click", function(e){
+            var navi_url = "http://api.map.baidu.com/marker?location="+e.point.lat+","+e.point.lng+"&title=&content="+marker.getTitle()+"&output=html&src=webapp.baidu.openAPIdemo";
+            window.open(navi_url);
+        });
+
 	}
 
    if(%s)
