@@ -16,6 +16,9 @@ class syntax_plugin_cnmap extends DokuWiki_Syntax_Plugin
     private $css_len_pattern ="/(^(auto|0)$|^[+-]?[0-9]+\.?([0-9]+)?)(px|em|ex|%|in|cm|mm|pt|pc)$/";
     private $providers = array('amap','bmap') ;
 
+    private $amap_script_src = '<script src="https://webapi.amap.com/maps?';
+    private $bmap_script_src = '<script type="text/javascript" src="http://api.map.baidu.com/api?';
+
     /**
      * @return string Syntax mode type
      */
@@ -85,6 +88,24 @@ class syntax_plugin_cnmap extends DokuWiki_Syntax_Plugin
     {
         if ($mode !== 'xhtml') {
             return false;
+        }
+
+        $pos = false;
+        switch($data['provider'])
+        {
+            case "amap":
+                $pos = strpos($renderer->doc, $this->amap_script_src);
+                break;
+            case "bmap":
+                $pos = strpos($renderer->doc, $this->bmap_script_src);
+                break;
+            default:
+                break;
+        }
+        if ($pos !== false)
+        {
+            $data[0]= "<!-- ";
+            $data[2]= " -->";
         }
 
         $html_tpl = @file_get_contents(__DIR__."/tpl/".$data['provider'].".tpl.html");
@@ -170,11 +191,14 @@ class syntax_plugin_cnmap extends DokuWiki_Syntax_Plugin
         $args['title']=str_replace(">","\\>", $args['title']);
 
         $data = array();
+        array_push($data,  "");
+        array_push($data,  $this->getConf('amap_api_key'));
+        array_push($data,  "");
+
         array_push($data,  $container_id);
         array_push($data,  $args['width']);
         array_push($data,  $args['height']);
         array_push($data,  $container_id);
-        array_push($data,  $this->getConf('amap_api_key'));
         array_push($data,  $id);
         array_push($data,  $args['lng']);
         array_push($data,  $args['lat']);
@@ -207,11 +231,14 @@ class syntax_plugin_cnmap extends DokuWiki_Syntax_Plugin
         $args['title']=str_replace(">","\\>", $args['title']);
 
         $data = array();
+        array_push($data,  "");
+        array_push($data,  $this->getConf('bmap_api_key'));
+        array_push($data,  "");
+
         array_push($data,  $container_id);
         array_push($data,  $args['width']);
         array_push($data,  $args['height']);
         array_push($data,  $container_id);
-        array_push($data,  $this->getConf('bmap_api_key'));
         array_push($data,  $id);
         array_push($data,  $args['lng']);
         array_push($data,  $args['lat']);
