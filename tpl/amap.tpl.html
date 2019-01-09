@@ -18,26 +18,26 @@ function showMap%s()
        zoom:%d
     });
 
-	if(%s)
-	{
+    if(%s)
+    {
         var marker = new AMap.Marker({
             position: [pnt.lng, pnt.lat],
             offset: new AMap.Pixel(-13, -30)
         });
-	    marker.setTitle("%s");
+        marker.setTitle("%s");
         marker.setMap(map);
 
         marker.on('click', function (e){
-			  var navi_url = "https://uri.amap.com/marker?position="+e.lnglat.getLng()+","+e.lnglat.getLat()+"&name="+(marker.getTitle())+"&callnative=1";
-			  window.open(navi_url);
-		});
-	}
+              var navi_url = "https://uri.amap.com/marker?position="+e.lnglat.getLng()+","+e.lnglat.getLat()+"&name="+(marker.getTitle())+"&callnative=1";
+              window.open(navi_url);
+        });
+    }
 
-	if(%s)
-	{
+    if(%s)
+    {
        var layers =  [ new AMap.TileLayer.Satellite(),  new AMap.TileLayer.RoadNet() ];
        map.setLayers(layers);
-	}
+    }
 }
 showMap%s();
 </script>

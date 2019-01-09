@@ -6,28 +6,28 @@
 function showMap%s()
 {
     var pnt = gcj02_to_bd09(%f,%f);
-	var map = new BMap.Map("%s");
-	map.centerAndZoom(new BMap.Point(pnt.lng, pnt.lat), %d);
-	map.enableScrollWheelZoom(true);
+    var map = new BMap.Map("%s");
+    map.centerAndZoom(new BMap.Point(pnt.lng, pnt.lat), %d);
+    map.enableScrollWheelZoom(true);
 
     if(%s)
-	{
-		var point = new BMap.Point(pnt.lng, pnt.lat);
-		var marker = new BMap.Marker(point);
-		marker.setTitle("%s");
-	    map.addOverlay(marker);
+    {
+        var point = new BMap.Point(pnt.lng, pnt.lat);
+        var marker = new BMap.Marker(point);
+        marker.setTitle("%s");
+        map.addOverlay(marker);
 
         marker.addEventListener("click", function(){
             var mp = marker.getPosition();
             var navi_url = "http://api.map.baidu.com/marker?location="+mp.lat+","+mp.lng+"&title="+encodeURIComponent(marker.getTitle())+"&content="+encodeURIComponent(marker.getTitle())+"&output=html&src=webapp.baidu.openAPIdemo";
             window.open(navi_url);
         });
-	}
+    }
 
    if(%s)
-	{
-		map.setMapType(BMAP_HYBRID_MAP);
-	}
+    {
+        map.setMapType(BMAP_HYBRID_MAP);
+    }
 }
 showMap%s();
 
