@@ -17,6 +17,7 @@ function showMap%s()
        center:[pnt.lng, pnt.lat],
        zoom:%d
     });
+
 	if(%s)
 	{
         var marker = new AMap.Marker({
@@ -29,9 +30,7 @@ function showMap%s()
         marker.on('click', function (e){
 			  var navi_url = "https://uri.amap.com/marker?position="+e.lnglat.getLng()+","+e.lnglat.getLat()+"&name="+(marker.getTitle())+"&callnative=1";
 			  window.open(navi_url);
-		}
-
-        );
+		});
 	}
 
 	if(%s)

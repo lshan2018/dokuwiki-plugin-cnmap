@@ -163,7 +163,7 @@ class syntax_plugin_cnmap extends DokuWiki_Syntax_Plugin
      */
     public function parseMatchAmap($args) {
         $id = rand(1000,2000);
-        $container_id ="cnmap_container_".$id;
+        $container_id ="amap_container_".$id;
 
         $args['title']=addslashes($args['title']);
         $args['title']=str_replace("<","\\<", $args['title']);
@@ -199,7 +199,8 @@ class syntax_plugin_cnmap extends DokuWiki_Syntax_Plugin
      * @return array Data for the renderer
      */
     public function parseMatchBmap($args) {
-        $container_id ="cnmap_container_".rand(2000,3000);
+        $id = rand(2000,3000);
+        $container_id ="bmap_container_".$id;
 
         $args['title']=addslashes($args['title']);
         $args['title']=str_replace("<","\\<", $args['title']);
@@ -211,14 +212,15 @@ class syntax_plugin_cnmap extends DokuWiki_Syntax_Plugin
         array_push($data,  $args['height']);
         array_push($data,  $container_id);
         array_push($data,  $this->getConf('bmap_api_key'));
+        array_push($data,  $id);
         array_push($data,  $args['lng']);
         array_push($data,  $args['lat']);
         array_push($data,  $container_id);
         array_push($data,  $args['zoom']);
-
         array_push($data,  $args['mark']?"true":"false");
         array_push($data,  $args['title']);
         array_push($data,  $args['sat']?"true":"false");
+        array_push($data,  $id);
 
         $data['provider']= $args['provider'];
 

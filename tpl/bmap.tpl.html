@@ -3,11 +3,13 @@
 <div id="%s"></div>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=%s"></script>
 <script type="text/javascript">
+function showMap%s()
 {
     var pnt = gcj02_to_bd09(%f,%f);
 	var map = new BMap.Map("%s");
 	map.centerAndZoom(new BMap.Point(pnt.lng, pnt.lat), %d);
 	map.enableScrollWheelZoom(true);
+
     if(%s)
 	{
 		var point = new BMap.Point(pnt.lng, pnt.lat);
@@ -19,19 +21,19 @@
             var navi_url = "http://api.map.baidu.com/marker?location="+e.point.lat+","+e.point.lng+"&title=&content="+marker.getTitle()+"&output=html&src=webapp.baidu.openAPIdemo";
             window.open(navi_url);
         });
-
 	}
 
    if(%s)
 	{
 		map.setMapType(BMAP_HYBRID_MAP);
 	}
+}
+showMap%s();
 
-    function gcj02_to_bd09(lng, lat) {
+function gcj02_to_bd09(lng, lat) {
         var z = Math.sqrt(lng * lng + lat * lat) + 0.00002 * Math.sin(lat * Math.PI);
         var theta = Math.atan2(lat, lng) + 0.000003 * Math.cos(lng * Math.PI);
         return { lng: z * Math.cos(theta) + 0.0065, lat: z * Math.sin(theta) + 0.006 };
-    }
 }
 </script>
 
