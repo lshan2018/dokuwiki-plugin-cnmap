@@ -162,7 +162,8 @@ class syntax_plugin_cnmap extends DokuWiki_Syntax_Plugin
      * @return array Data for the renderer
      */
     public function parseMatchAmap($args) {
-        $container_id ="cnmap_container_".rand(1000,2000);
+        $id = rand(1000,2000);
+        $container_id ="cnmap_container_".$id;
 
         $args['title']=addslashes($args['title']);
         $args['title']=str_replace("<","\\<", $args['title']);
@@ -174,6 +175,7 @@ class syntax_plugin_cnmap extends DokuWiki_Syntax_Plugin
         array_push($data,  $args['height']);
         array_push($data,  $container_id);
         array_push($data,  $this->getConf('amap_api_key'));
+        array_push($data,  $id);
         array_push($data,  $args['lng']);
         array_push($data,  $args['lat']);
         array_push($data,  $container_id);
@@ -181,6 +183,7 @@ class syntax_plugin_cnmap extends DokuWiki_Syntax_Plugin
         array_push($data,  $args['mark']?"true":"false");
         array_push($data,  $args['title']);
         array_push($data,  $args['sat']?"true":"false");
+        array_push($data,  $id);
 
         $data['provider']= $args['provider'];
 

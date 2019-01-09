@@ -9,8 +9,9 @@
 <div id="%s"></div>
 <script src="https://webapi.amap.com/maps?v=1.4.12&key=%s"></script>
 <script type="text/javascript">
+function showMap%s()
 {
-   var pnt = {lng:%f, lat:%f};
+    var pnt = {lng:%f, lat:%f};
     var map = new AMap.Map("%s", {
        resizeEnable: true,
        center:[pnt.lng, pnt.lat],
@@ -39,4 +40,5 @@
        map.setLayers(layers);
 	}
 }
+showMap%s();
 </script>
